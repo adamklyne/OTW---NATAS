@@ -26,32 +26,27 @@ print(payload)
 response = requests.post(url, auth=auth, data=payload)
 print(response.text)
 
-'''
-Inspecting the webpage source code revealed the following:
-
-    <body>
-    <h1>natas4</h1>
-    <div id="content">
-
-    <body>
-    <h1>natas5</h1>
-    <div id="content">
-    Access disallowed. You are not logged in</div>
-    </body>
-    </html>
-
-With this in mind, I injected the appropriate 'loggedin' cookie
-'''
-
 next_password = (re.findall("natas7 is (.*)",response.text))[0]
 
 print(next_password)
 
-with open('README.md','a+') as file:
+'''
+Automatically add new password to README.md if it's not already there.
+I'm not sure if I want to use this yet...but it was a fun little problem to solve
+'''
+
+natas = []
+flag = False
+r = re.compile("natas7.*")
+with open('README.md','r') as file:
     for line in file:
-        print(line.read())
-        if username not in line:
-            file.write(username + ' | ' + next_password +'\n')
+        type(line) 
+        if '## Passwords' in line:
+            flag = True 
+        elif flag == True:
+            natas.append(line)
 file.close()
-
-
+if not list(filter(r.match, natas)):
+    file = open('README.md','a+')
+    file.write('\n\nnatas7 | %s' % next_password)
+    file.close()
