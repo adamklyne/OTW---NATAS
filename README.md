@@ -1,5 +1,7 @@
 > Adam Klyne | Jan-21
 
+This is my attempt at working through the Over The Wire Natas CTF. The idea for using Python came from John Hammond.
+
 # OTW - NATAS
 
 ## Level 0
